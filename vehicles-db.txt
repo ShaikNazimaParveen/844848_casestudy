@@ -1,0 +1,686 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 30
+Server version: 8.0.19 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database sms;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use sms;
+Database changed
+mysql> create table series(id int,series varchar(20),PRIMARY KEY(id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table modelyear(id int,model_year varchar(20),series_id int,PRIMARY KEY(id),
+    -> FOREIGN KEY (series_id) REFERENCES series(id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table modelcode(id int,model_code varchar(20),modelyear_id int,series_id int,PRIMARY KEY(id),
+    -> FOREIGN KEY (series_id) REFERENCES series(id),
+    -> FOREIGN KEY (modelyear_id) REFERENCES modelyear(id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table accessory(id int,accessory varchar(20),modelcode_id int,PRIMARY KEY(id),
+    -> FOREIGN KEY (modelcode_id) REFERENCES modelcode(id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table dipaccessory(id int,dipaccessory varchar(20),series_id int,PRIMARY KEY(id),
+    -> FOREIGN KEY (series_id) REFERENCES series(id));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into series(id,series) values(101,'S_001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(102,'S_002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(103,'S_003');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(104,'S_004');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(105,'S_005');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(106,'S_006');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(107,'S_007');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(108,'S_008');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(109,'S_009');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(110,'S_010');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(111,'S_011');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(112,'S_012');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(113,'S_013');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(114,'S_014');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(115,'S_015');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(116,'S_016');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(117,'S_017');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(118,'S_018');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(119,'S_019');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(120,'S_020');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(121,'S_021');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(122,'S_022');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(123,'S_023');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(124,'S_024');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into series(id,series) values(125,'S_025');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from series;
++-----+--------+
+| id  | series |
++-----+--------+
+| 101 | S_001  |
+| 102 | S_002  |
+| 103 | S_003  |
+| 104 | S_004  |
+| 105 | S_005  |
+| 106 | S_006  |
+| 107 | S_007  |
+| 108 | S_008  |
+| 109 | S_009  |
+| 110 | S_010  |
+| 111 | S_011  |
+| 112 | S_012  |
+| 113 | S_013  |
+| 114 | S_014  |
+| 115 | S_015  |
+| 116 | S_016  |
+| 117 | S_017  |
+| 118 | S_018  |
+| 119 | S_019  |
+| 120 | S_020  |
+| 121 | S_021  |
+| 122 | S_022  |
+| 123 | S_023  |
+| 124 | S_024  |
+| 125 | S_025  |
++-----+--------+
+25 rows in set (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(201,2011,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(201,2012,102);
+ERROR 1062 (23000): Duplicate entry '201' for key 'modelyear.PRIMARY'
+mysql> insert into modelyear(id,model_year,series_id) values(202,2012,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(203,2012,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(204,2013,103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(205,2011,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(205,2011,103);
+ERROR 1062 (23000): Duplicate entry '205' for key 'modelyear.PRIMARY'
+mysql> insert into modelyear(id,model_year,series_id) values(206,2011,103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(207,2014,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(208,2015,105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(209,2016,106);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(210,2017,107);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from modelyear;
++-----+------------+-----------+
+| id  | model_year | series_id |
++-----+------------+-----------+
+| 201 | 2011       |       101 |
+| 202 | 2012       |       102 |
+| 203 | 2012       |       101 |
+| 204 | 2013       |       103 |
+| 205 | 2011       |       102 |
+| 206 | 2011       |       103 |
+| 207 | 2014       |       104 |
+| 208 | 2015       |       105 |
+| 209 | 2016       |       106 |
+| 210 | 2017       |       107 |
++-----+------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1001,'M_001',201,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1001,'M_001',202,102);
+ERROR 1062 (23000): Duplicate entry '1001' for key 'modelcode.PRIMARY'
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1002,'M_001',202,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1003,'M_002',202,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1004,'M_003',203,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1005,'M_004',204,103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1006,'M_005',205,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1007,'M_006',205,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1008,'M_006',205,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1008,'M_006',205,106);
+ERROR 1062 (23000): Duplicate entry '1008' for key 'modelcode.PRIMARY'
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1009,'M_006',205,106);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1010,'M_007',206,107);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from modelcode;
++------+------------+--------------+-----------+
+| id   | model_code | modelyear_id | series_id |
++------+------------+--------------+-----------+
+| 1001 | M_001      |          201 |       101 |
+| 1002 | M_001      |          202 |       102 |
+| 1003 | M_002      |          202 |       102 |
+| 1004 | M_003      |          203 |       102 |
+| 1005 | M_004      |          204 |       103 |
+| 1006 | M_005      |          205 |       104 |
+| 1007 | M_006      |          205 |       104 |
+| 1008 | M_006      |          205 |       104 |
+| 1009 | M_006      |          205 |       106 |
+| 1010 | M_007      |          206 |       107 |
++------+------------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> insert into accessories(id,accessory,modelcode_id) values(301,'A_001',1001);
+ERROR 1146 (42S02): Table 'sms.accessories' doesn't exist
+mysql> insert into accessory(id,accessory,modelcode_id) values(301,'A_001',1001);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(302,'A_002',1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(303,'A_003',1003);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(304,'A_004',1004);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(305,'A_005',1005);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(306,'A_006',1006);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(307,'A_007',1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(308,'A_008',1008);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(309,'A_009',1009);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(310,'A_010',1010);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from accessory;
++-----+-----------+--------------+
+| id  | accessory | modelcode_id |
++-----+-----------+--------------+
+| 301 | A_001     |         1001 |
+| 302 | A_002     |         1002 |
+| 303 | A_003     |         1003 |
+| 304 | A_004     |         1004 |
+| 305 | A_005     |         1005 |
+| 306 | A_006     |         1006 |
+| 307 | A_007     |         1007 |
+| 308 | A_008     |         1008 |
+| 309 | A_009     |         1009 |
+| 310 | A_010     |         1010 |
++-----+-----------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into dipaccessories(id,dipaccessory,series_id) values(401,'D_001',101);
+ERROR 1146 (42S02): Table 'sms.dipaccessories' doesn't exist
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(401,'D_001',101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(402,'D_002',102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(403,'D_003',103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(404,'D_004',104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(405,'D_005',105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(406,'D_006',106);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(407,'D_007',107);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(408,'D_008',108);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(409,'D_009',109);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(410,'D_010',110);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from dipccessory;
+ERROR 1146 (42S02): Table 'sms.dipccessory' doesn't exist
+mysql> select* from dipaccessory;
++-----+--------------+-----------+
+| id  | dipaccessory | series_id |
++-----+--------------+-----------+
+| 401 | D_001        |       101 |
+| 402 | D_002        |       102 |
+| 403 | D_003        |       103 |
+| 404 | D_004        |       104 |
+| 405 | D_005        |       105 |
+| 406 | D_006        |       106 |
+| 407 | D_007        |       107 |
+| 408 | D_008        |       108 |
+| 409 | D_009        |       109 |
+| 410 | D_010        |       110 |
++-----+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(411,'D_011',111);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(412,'D_012',112);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(413,'D_013',113);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(414,'D_014',114);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(415,'D_015',115);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(416,'D_016',116);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(417,'D_017',117);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(418,'D_018',118);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(419,'D_019',119);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(420,'D_020',120);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(421,'D_021',121);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(422,'D_022',122);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(423,'D_023',123);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(424,'D_024',124);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dipaccessory(id,dipaccessory,series_id) values(425,'D_025',125);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from  dipaccessory;
++-----+--------------+-----------+
+| id  | dipaccessory | series_id |
++-----+--------------+-----------+
+| 401 | D_001        |       101 |
+| 402 | D_002        |       102 |
+| 403 | D_003        |       103 |
+| 404 | D_004        |       104 |
+| 405 | D_005        |       105 |
+| 406 | D_006        |       106 |
+| 407 | D_007        |       107 |
+| 408 | D_008        |       108 |
+| 409 | D_009        |       109 |
+| 410 | D_010        |       110 |
+| 411 | D_011        |       111 |
+| 412 | D_012        |       112 |
+| 413 | D_013        |       113 |
+| 414 | D_014        |       114 |
+| 415 | D_015        |       115 |
+| 416 | D_016        |       116 |
+| 417 | D_017        |       117 |
+| 418 | D_018        |       118 |
+| 419 | D_019        |       119 |
+| 420 | D_020        |       120 |
+| 421 | D_021        |       121 |
+| 422 | D_022        |       122 |
+| 423 | D_023        |       123 |
+| 424 | D_024        |       124 |
+| 425 | D_025        |       125 |
++-----+--------------+-----------+
+25 rows in set (0.00 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(211,2018,108);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(212,2019,109);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(212,2020,110);
+ERROR 1062 (23000): Duplicate entry '212' for key 'modelyear.PRIMARY'
+mysql> insert into modelyear(id,model_year,series_id) values(213,2020,110);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(214,2021,111);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(215,2001,112);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(216,2002,113);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(217,2003,114);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(218,2004,115);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(219,2005,116);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(220,2006,117);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(221,2007,118);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(222,2008,119);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(223,2009,120);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(224,2010,121);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelyear(id,model_year,series_id) values(225,2011,122);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from modelyear;
++-----+------------+-----------+
+| id  | model_year | series_id |
++-----+------------+-----------+
+| 201 | 2011       |       101 |
+| 202 | 2012       |       102 |
+| 203 | 2012       |       101 |
+| 204 | 2013       |       103 |
+| 205 | 2011       |       102 |
+| 206 | 2011       |       103 |
+| 207 | 2014       |       104 |
+| 208 | 2015       |       105 |
+| 209 | 2016       |       106 |
+| 210 | 2017       |       107 |
+| 211 | 2018       |       108 |
+| 212 | 2019       |       109 |
+| 213 | 2020       |       110 |
+| 214 | 2021       |       111 |
+| 215 | 2001       |       112 |
+| 216 | 2002       |       113 |
+| 217 | 2003       |       114 |
+| 218 | 2004       |       115 |
+| 219 | 2005       |       116 |
+| 220 | 2006       |       117 |
+| 221 | 2007       |       118 |
+| 222 | 2008       |       119 |
+| 223 | 2009       |       120 |
+| 224 | 2010       |       121 |
+| 225 | 2011       |       122 |
++-----+------------+-----------+
+25 rows in set (0.00 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1011,'M_010',211,111);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1012,'M_011',211,112);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1013,'M_011',212,112);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1014,'M_012',212,113);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1015,'M_013',213,114);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1016,'M_014',214,114);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1017,'M_015',215,115);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1018,'M_015',215,116);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1019,'M_016',216,117);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1020,'M_017',217,118);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1021,'M_018',218,119);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1022,'M_019',219,120);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1021,'M_020',220,121);
+ERROR 1062 (23000): Duplicate entry '1021' for key 'modelcode.PRIMARY'
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1023,'M_020',220,121);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1024,'M_021',221,122);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into modelcode(id,model_code,modelyear_id,series_id) values(1025,'M_022',222,123);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from modelcode;
++------+------------+--------------+-----------+
+| id   | model_code | modelyear_id | series_id |
++------+------------+--------------+-----------+
+| 1001 | M_001      |          201 |       101 |
+| 1002 | M_001      |          202 |       102 |
+| 1003 | M_002      |          202 |       102 |
+| 1004 | M_003      |          203 |       102 |
+| 1005 | M_004      |          204 |       103 |
+| 1006 | M_005      |          205 |       104 |
+| 1007 | M_006      |          205 |       104 |
+| 1008 | M_006      |          205 |       104 |
+| 1009 | M_006      |          205 |       106 |
+| 1010 | M_007      |          206 |       107 |
+| 1011 | M_010      |          211 |       111 |
+| 1012 | M_011      |          211 |       112 |
+| 1013 | M_011      |          212 |       112 |
+| 1014 | M_012      |          212 |       113 |
+| 1015 | M_013      |          213 |       114 |
+| 1016 | M_014      |          214 |       114 |
+| 1017 | M_015      |          215 |       115 |
+| 1018 | M_015      |          215 |       116 |
+| 1019 | M_016      |          216 |       117 |
+| 1020 | M_017      |          217 |       118 |
+| 1021 | M_018      |          218 |       119 |
+| 1022 | M_019      |          219 |       120 |
+| 1023 | M_020      |          220 |       121 |
+| 1024 | M_021      |          221 |       122 |
+| 1025 | M_022      |          222 |       123 |
++------+------------+--------------+-----------+
+25 rows in set (0.00 sec)
+
+mysql> insert into accessories(id,accessory,modelcode_id) values(311,'A_010',1010);
+ERROR 1146 (42S02): Table 'sms.accessories' doesn't exist
+mysql> insert into accessory(id,accessory,modelcode_id) values(311,'A_010',1010);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(312,'A_011',1010);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(313,'A_012',1011);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(314,'A_013',1012);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(315,'A_014',1013);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(316,'A_015',1013);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(317,'A_016',1014);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(318,'A_016',1015);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(319,'A_017',1016);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(320,'A_017',1017);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(321,'A_018',1018);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(322,'A_018',1018);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(323,'A_019',1019);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(324,'A_019',1020);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accessory(id,accessory,modelcode_id) values(325,'A_019',1021);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from accessory
+    -> ;
++-----+-----------+--------------+
+| id  | accessory | modelcode_id |
++-----+-----------+--------------+
+| 301 | A_001     |         1001 |
+| 302 | A_002     |         1002 |
+| 303 | A_003     |         1003 |
+| 304 | A_004     |         1004 |
+| 305 | A_005     |         1005 |
+| 306 | A_006     |         1006 |
+| 307 | A_007     |         1007 |
+| 308 | A_008     |         1008 |
+| 309 | A_009     |         1009 |
+| 310 | A_010     |         1010 |
+| 311 | A_010     |         1010 |
+| 312 | A_011     |         1010 |
+| 313 | A_012     |         1011 |
+| 314 | A_013     |         1012 |
+| 315 | A_014     |         1013 |
+| 316 | A_015     |         1013 |
+| 317 | A_016     |         1014 |
+| 318 | A_016     |         1015 |
+| 319 | A_017     |         1016 |
+| 320 | A_017     |         1017 |
+| 321 | A_018     |         1018 |
+| 322 | A_018     |         1018 |
+| 323 | A_019     |         1019 |
+| 324 | A_019     |         1020 |
+| 325 | A_019     |         1021 |
++-----+-----------+--------------+
+25 rows in set (0.00 sec)
+--------------------------------------------------
+
+
+mysql> create database UserDetails;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use  UserDetails;
+Database changed
+mysql> create table user(id int NOT NULL AUTO INCREMENT,emailId varchar(50),Username varchar(50),password varchar(20),
+    -> PRIMARY KEY(id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into user(id,emailId,Username,password) values(1,'nazima@gmail.com','Nazima','1234asd');
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> create database AdminDetails;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use  AdminDetails;
+Database changed
+mysql> create table admin(id int NOT NULL AUTO INCREMENT,Username varchar(50),password varchar(20),
+    -> PRIMARY KEY(id));
+Query OK, 0 rows affected (0.05 sec)
+
